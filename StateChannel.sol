@@ -184,8 +184,8 @@ contract StateChannel is IMultiSigTransferReceiver, Common {
 
         // check that the balance change is acceptable
         // this must *never* trigger
-        assert((balanceChange < 0) || (int256(stateContents.balances[0]) > (-balanceChange))); // Does Participant #0 have enough funds
-        assert((balanceChange > 0) || (int256(stateContents.balances[1]) > ( balanceChange))); // Does Participant #1 have enough funds
+        assert((balanceChange >= 0) || (int256(stateContents.balances[0]) > (-balanceChange))); // Does Participant #0 have enough funds
+        assert((balanceChange <= 0) || (int256(stateContents.balances[1]) > ( balanceChange))); // Does Participant #1 have enough funds
 
         newStateContents.channelID = stateContents.channelID;
         newStateContents.channelAddress = stateContents.channelAddress;
